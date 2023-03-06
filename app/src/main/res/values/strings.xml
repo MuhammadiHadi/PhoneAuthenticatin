@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">PhoneAuthenticatin</string>
+    <string name="login_with_phone">Login With Phone</string>
+    <string name="android_dev">Android Dev</string>
+</resources>
