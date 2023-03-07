@@ -2,4 +2,6 @@
     <string name="app_name">PhoneAuthenticatin</string>
     <string name="login_with_phone">Login With Phone</string>
     <string name="android_dev">Android Dev</string>
+    <string name="login_with_google">Login With Google</string>
+    <string name="google">Google</string>
 </resources>
