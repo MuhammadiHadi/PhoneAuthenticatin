@@ -9,7 +9,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import com.example.phoneauthenticatin.databinding.ActivityMainBinding
-import com.example.phoneauthenticatin.ui.LoginFragment
+import com.example.phoneauthenticatin.ui.SigInUPFragment
+import com.example.phoneauthenticatin.ui.VerifyEmailFragment
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -41,12 +42,12 @@ class MainActivity : AppCompatActivity() {
         // Initialize sign in client
        val googleSignInClient = GoogleSignIn.getClient(this, googleSignInOptions)
 
-           binding.googleLogin.setOnClickListener {
-
-               val intent: Intent = googleSignInClient.signInIntent
-               startActivityForResult(intent,10)
-
-           }
+//           binding.googleLogin.setOnClickListener {
+//
+//               val intent: Intent = googleSignInClient.signInIntent
+//               startActivityForResult(intent,10)
+//
+//           }
 //       auth = FirebaseAuth.getInstance()
 //        // Initialize firebase user
 //        val firebaseUser: FirebaseUser? =   auth .currentUser
@@ -61,27 +62,18 @@ class MainActivity : AppCompatActivity() {
 //            )
 //        }
 
-
+        // go to Loginview
         binding.button.setOnClickListener{
-//
-//        Toast.makeText(this,
-//           "Utility Bill", Toast.LENGTH_SHORT).show()
-            replaceFragment(LoginFragment())
+            val intent=Intent(this,LoginView::class.java)
+            startActivity(intent)
         }
-    }
-    fun replaceFragment(Fragment: Fragment){
-        val fragmentTransaction=supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.homeLayout,Fragment)
-        fragmentTransaction.addToBackStack(null).commit()
-    }
 
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount == 0)
-            super.onBackPressed()
-        else
-            supportFragmentManager.popBackStack()
+        binding.signUPbutton.setOnClickListener{
+            startActivity(Intent(this,VerifyEmailView::class.java))
+        }
 
     }
+
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

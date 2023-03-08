@@ -6,13 +6,16 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
+import androidx.databinding.DataBindingUtil
 import com.bumptech.glide.Glide
+import com.example.phoneauthenticatin.databinding.ActivityUserProfileBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.firebase.auth.FirebaseAuth
 
 class UserProfile : AppCompatActivity() {
+    private lateinit var binding:ActivityUserProfileBinding
     lateinit var ivImage: ImageView
     lateinit var tvName: TextView
     lateinit var btLogout: Button
@@ -20,7 +23,8 @@ class UserProfile : AppCompatActivity() {
     lateinit var googleSignInClient: GoogleSignInClient
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_user_profile)
+        binding=DataBindingUtil.setContentView(this,R.layout.activity_user_profile)
+        setContentView(binding.root)
         supportActionBar?.hide()
 
         ivImage = findViewById(R.id.iv_image)
@@ -39,6 +43,7 @@ class UserProfile : AppCompatActivity() {
             Glide.with(this).load(firebaseUser.photoUrl).into(ivImage)
             // set name on text view
             tvName.text = firebaseUser.displayName
+            binding.useremail.text=firebaseUser.email
         }
 
         // Initialize sign in client

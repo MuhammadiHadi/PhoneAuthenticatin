@@ -17,6 +17,20 @@
         android:theme="@style/Theme.PhoneAuthenticatin"
         tools:targetApi="31">
         <activity
+            android:name=".VerifyEmailView"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
+            android:name=".LoginView"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".UserProfile"
             android:exported="false">
             <meta-data
