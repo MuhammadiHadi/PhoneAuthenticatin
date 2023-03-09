@@ -16,9 +16,26 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PhoneAuthenticatin"
         tools:targetApi="31">
+        <activity android:name=".SendEmailLinkView"
+            android:exported="true">
+
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+
+
+        </activity>
         <activity
             android:name=".VerifyEmailView"
-            android:exported="false">
+            android:exported="true">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="phone-auth-f0bfe.web.app"
+                    android:scheme="https"
+                    />
+            </intent-filter>
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />

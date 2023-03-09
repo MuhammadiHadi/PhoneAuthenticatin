@@ -46,9 +46,9 @@ class SigInUPFragment:Fragment() {
                   .addOnCompleteListener { task ->
                       if (task.isSuccessful) {
                           auth.currentUser?.sendEmailVerification()?.addOnSuccessListener{
-                              Toast.makeText(SigIn.context, "Please Verify Email",
-                                  Toast.LENGTH_SHORT).show()
-                              Log.d(ContentValues.TAG, "Please Verify Email")
+
+                              showToast.showToast(SigIn.context,msg = "Please Verify Email")
+
                           }?.addOnFailureListener(){
                               Toast.makeText(SigIn.context, it.toString(),
                                   Toast.LENGTH_SHORT).show()
@@ -60,8 +60,8 @@ class SigInUPFragment:Fragment() {
                       } else {
                           // If sign in fails, display a message to the user.
                           Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
-                          Toast.makeText(SigIn.context, "Authentication failed.",
-                              Toast.LENGTH_SHORT).show()
+                          showToast.showToast(SigIn.context,msg = "Authentication failed.")
+
 
                       }
                   }

@@ -1,15 +1,21 @@
 package com.example.phoneauthenticatin
 
-import android.content.DialogInterface
-import androidx.appcompat.app.AppCompatActivity
+import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.widget.Toast
+import android.util.Log
+import android.view.View
+import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.VIEW_MODEL_STORE_OWNER_KEY
 import com.example.phoneauthenticatin.databinding.VerifyEmailLayoutBinding
-import com.example.phoneauthenticatin.ui.SendEmailLinkFragment
 import com.example.phoneauthenticatin.utils.MainUtils
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.ActionCodeSettings
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.ktx.actionCodeSettings
+import java.util.*
+
 
 class VerifyEmailView : AppCompatActivity() {
     private lateinit var binding:VerifyEmailLayoutBinding
@@ -26,28 +32,42 @@ class VerifyEmailView : AppCompatActivity() {
         val khan=MainUtils()
         binding.verifyEmailLink.setOnClickListener{
 
-//            val email=emailvale.text.trim().toString()
-//            auth.signInWithEmailLink(email)?.addOnSuccessListener {
-//                Toast.makeText(this,"Please Check Your Email",Toast.LENGTH_SHORT).show()
-//            }?.addOnFailureListener(){
-//                Toast.makeText(this,"Error",Toast.LENGTH_SHORT).show()
+
+           val emailID=binding.emailLink.text.toString()
+            binding.progressBar3.visibility= View.VISIBLE
+
+            val actionCodeSettings = ActionCodeSettings.newBuilder()
+                .setUrl("https://phone-auth-f0bfe.web.app")
+                .setHandleCodeInApp(true)
+                .setAndroidPackageName(
+                    "com.example.phoneauthenticatin",
+                    false, /* installIfNotAvailable */
+                    "12" /* minimumVersion */)
+                .build()
+          if(emailID.isNotEmpty()){
+              auth.sendSignInLinkToEmail(emailID, actionCodeSettings)
+                  .addOnCompleteListener(OnCompleteListener<Void?> { task ->
+                      Log.d(TAG, "onComplete: ")
+                      if (task.isSuccessful) {
+
+                          khan.showToast(this,"please check your Email")
+                          binding.progressBar3.visibility= View.INVISIBLE
+
+                      } else {
+
+                          println("userEmail$emailID ID and actioncode$actionCodeSettings")
+                          khan.showToast(this,"Error")
+                          binding.progressBar3.visibility= View.INVISIBLE
+                      }
+                  })
+          }else{
+              binding.progressBar3.visibility= View.INVISIBLE
+              khan.showToast(this,"Enter Email")
+          }
 
         }
 
 
-
-    }
-    fun replaceFragment(Fragment: Fragment){
-        val fragmentTransaction=supportFragmentManager.beginTransaction()
-        fragmentTransaction.replace(R.id.verifylayout,Fragment)
-        fragmentTransaction.addToBackStack(null).commit()
-    }
-
-    override fun onBackPressed() {
-        if (supportFragmentManager.backStackEntryCount == 0)
-            super.onBackPressed()
-        else
-            supportFragmentManager.popBackStack()
 
     }
 }
