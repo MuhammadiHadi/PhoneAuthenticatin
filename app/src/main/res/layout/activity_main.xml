@@ -114,7 +114,7 @@
             android:layout_marginHorizontal="@dimen/_20sdp"
             android:layout_marginTop="12dp"
             android:background="@drawable/round_button"
-            android:text="SignUP"
+            android:text="Login With Email"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.509"

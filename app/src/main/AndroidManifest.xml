@@ -2,9 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <uses-permission android:name="android.permission.INTERNET" />
+
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -18,6 +18,14 @@
         tools:targetApi="31">
         <activity android:name=".SendEmailLinkView"
             android:exported="true">
+<!--                        <intent-filter>-->
+<!--                            <action android:name="android.intent.action.VIEW"/>-->
+<!--                            <category android:name="android.intent.category.DEFAULT"/>-->
+<!--                            <category android:name="android.intent.category.BROWSABLE"/>-->
+<!--                            <data android:host="phone-auth-f0bfe.firebaseapp.com"-->
+<!--                                android:scheme="https"-->
+<!--                                />-->
+<!--                        </intent-filter>-->
 
             <meta-data
                 android:name="android.app.lib_name"
@@ -28,14 +36,7 @@
         <activity
             android:name=".VerifyEmailView"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-                <category android:name="android.intent.category.BROWSABLE"/>
-                <data android:host="phone-auth-f0bfe.web.app"
-                    android:scheme="https"
-                    />
-            </intent-filter>
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
@@ -49,7 +50,8 @@
         </activity>
         <activity
             android:name=".UserProfile"
-            android:exported="false">
+            android:exported="true">
+
             <meta-data
                 android:name="android.app.lib_name"
                 android:value="" />
