@@ -3,6 +3,8 @@ package com.example.phoneauthenticatin.ui
 import android.content.ContentValues
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
+import android.util.Patterns.EMAIL_ADDRESS
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -41,34 +43,43 @@ class SigInUPFragment:Fragment() {
         binding.sigIN.setOnClickListener{
             val email=userEmail.text.toString()
             val password=UserPassword.text.toString()
-          if(email.isNotEmpty()&&password.isNotEmpty()){
-              auth.createUserWithEmailAndPassword(email, password)
-                  .addOnCompleteListener { task ->
-                      if (task.isSuccessful) {
-                          auth.currentUser?.sendEmailVerification()?.addOnSuccessListener{
-
-                              showToast.showToast(SigIn.context,msg = "Please Verify Email")
-
-                          }?.addOnFailureListener(){
-                              Toast.makeText(SigIn.context, it.toString(),
-                                  Toast.LENGTH_SHORT).show()
-                          }
-//                        Toast.makeText(SigIn.context, "Authentication success.",
-//                            Toast.LENGTH_SHORT).show()
-//                        Log.d(ContentValues.TAG, "signInWithEmail:success")
-
-                      } else {
-                          // If sign in fails, display a message to the user.
-                          Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
-                          showToast.showToast(SigIn.context,msg = "Authentication failed.")
 
 
-                      }
-                  }
 
-          }else{
-             showToast.showToast(SigIn.context,msg = "Enter Email and Password")
-          }
+            if(email.isEmpty()&& Patterns.EMAIL_ADDRESS.matcher(email).matches()){
+                showToast.showToast(SigIn.context,"email is validate")
+
+            }else{
+                showToast.showToast(SigIn.context,"Enter correct email")
+            }
+//          if(email.isNotEmpty()&&password.isNotEmpty()){
+////              auth.createUserWithEmailAndPassword(email, password)
+////                  .addOnCompleteListener { task ->
+////                      if (task.isSuccessful) {
+////                          auth.currentUser?.sendEmailVerification()?.addOnSuccessListener{
+////
+////                              showToast.showToast(SigIn.context,msg = "Please Verify Email")
+////
+////                          }?.addOnFailureListener(){
+////                              Toast.makeText(SigIn.context, it.toString(),
+////                                  Toast.LENGTH_SHORT).show()
+////                          }
+//////                        Toast.makeText(SigIn.context, "Authentication success.",
+//////                            Toast.LENGTH_SHORT).show()
+//////                        Log.d(ContentValues.TAG, "signInWithEmail:success")
+////
+////                      } else {
+////                          // If sign in fails, display a message to the user.
+////                          Log.w(ContentValues.TAG, "signInWithEmail:failure", task.exception)
+////                          showToast.showToast(SigIn.context,msg = "Authentication failed.")
+////
+////
+////                      }
+////                  }
+//
+//          }else{
+//             showToast.showToast(SigIn.context,msg = "Enter Email and Password")
+//          }
         }
 
 
